@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Électronique 2 – L2</title>
+<link rel="stylesheet" href="style.css">
+<script src="script.js" defer></script>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="tag">L2I · Module 2</div>
+    <h1>Électronique 2</h1>
+    <p>Guide interactif — semi-conducteurs, diodes, transistors bipolaires</p>
+  </header>
+
+  <div class="stats-row">
+    <div class="stat-card"><span class="stat-num">3</span><div class="stat-label">CHAPITRES</div></div>
+    <div class="stat-card"><span class="stat-num">12</span><div class="stat-label">CONCEPTS CLÉS</div></div>
+    <div class="stat-card"><span class="stat-num">10</span><div class="stat-label">EXERCICES</div></div>
+    <div class="stat-card"><span class="stat-num" id="score-display">0</span><div class="stat-label">SCORE MCQ</div></div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="showSection('cours')">📚 Cours Interactif</button>
+    <button class="tab-btn" onclick="showSection('resume')">📋 Résumés</button>
+    <button class="tab-btn" onclick="showSection('exercices')">✏️ Exercices</button>
+  </div>
+
+  <!-- ===================== COURS ===================== -->
+  <div class="section active" id="cours">
+
+    <!-- CHAPITRE 1 -->
+    <div class="chapter-card" id="ch1">
+      <div class="chapter-header" onclick="toggleChapter('ch1')">
+        <span class="chapter-num">CHAP 01</span>
+        <span class="chapter-title">Introduction aux composants à semi-conducteur</span>
+        <span class="chapter-chevron">▼</span>
+      </div>
+      <div class="chapter-body">
+
+        <h3>I. Les semi-conducteurs purs</h3>
+        <div class="concept">
+          <h4>DÉFINITION</h4>
+          <p>Un <strong>semi-conducteur pur</strong> (intrinsèque) comme le <strong>Silicium (Si)</strong> est un solide cristallisé. Ses atomes partagent 4 électrons périphériques avec 4 voisins.</p>
+          <ul>
+            <li>À température ordinaire (~20°C), l'agitation thermique libère certains électrons → <strong>électrons libres</strong>.</li>
+            <li>La libération d'un électron laisse un <strong>trou</strong> (ion positif).</li>
+            <li>Il y a autant de trous que d'électrons libres → le matériau reste <strong>neutre</strong>.</li>
+          </ul>
+        </div>
+
+        <h3>II. Semi-conducteurs dopés</h3>
+        <div class="concept">
+          <h4>TYPE N (donneur)</h4>
+          <p>Ajout d'un atome à <strong>5 électrons</strong> périphériques (ex: phosphore). Le 5ème électron est libre.</p>
+          <ul>
+            <li>Porteurs <strong>majoritaires</strong> : électrons (–)</li>
+            <li>Porteurs <strong>minoritaires</strong> : trous (+)</li>
+          </ul>
+        </div>
+        <div class="concept">
+          <h4>TYPE P (accepteur)</h4>
+          <p>Ajout d'un atome à <strong>3 électrons</strong> périphériques (ex: bore). Un défaut d'électron crée un trou.</p>
+          <ul>
+            <li>Porteurs <strong>majoritaires</strong> : trous (+)</li>
+            <li>Porteurs <strong>minoritaires</strong> : électrons (–)</li>
+          </ul>
+        </div>
+
+        <h3>III. La jonction PN</h3>
+        <div class="schema-visual">
+          <span class="node node-p">Zone P<br/><small>trous ++</small></span>
+          <span class="arrow">⟵ E₀ ⟶</span>
+          <span class="node node-j">Jonction<br/><small>Zone de transition</small></span>
+          <span class="arrow">⟵ V₀ ⟶</span>
+          <span class="node node-n">Zone N<br/><small>électrons --</small></span>
+        </div>
+        <div class="concept">
+          <h4>SANS POLARISATION</h4>
+          <p>À la jonction, les porteurs se neutralisent → <strong>zone de transition</strong> (ou désertion). Il se crée :</p>
+          <ul>
+            <li>Un <strong>champ électrostatique E₀</strong> dirigé de N vers P</li>
+            <li>Une <strong>tension de diffusion V₀</strong></li>
+            <li>Un <strong>courant de diffusion I_D</strong> (P→N) et un <strong>courant de saturation I_S</strong> (N→P) qui s'équilibrent</li>
+          </ul>
+        </div>
+        <div class="highlight-box">
+          <strong>Polarisation directe :</strong>
+          <p>Pôle + sur P, pôle – sur N. La barrière diminue, le courant direct I_d ≈ I_D circule. <strong>La jonction conduit.</strong></p>
+        </div>
+        <div class="highlight-box">
+          <strong>Polarisation inverse :</strong>
+          <p>Pôle + sur N, pôle – sur P. La barrière augmente, seul le très faible courant I_S circule. <strong>La jonction est bloquée.</strong></p>
+        </div>
+
+        <h3>IV. Le transistor bipolaire (aperçu)</h3>
+        <div class="concept">
+          <h4>STRUCTURE</h4>
+          <p>3 zones dopées alternées : <strong>NPN</strong> ou <strong>PNP</strong>, soit 2 jonctions PN.</p>
+          <ul>
+            <li><strong>Émetteur (E)</strong> : zone fortement dopée, injecte les porteurs</li>
+            <li><strong>Base (B)</strong> : zone très mince et faiblement dopée</li>
+            <li><strong>Collecteur (C)</strong> : recueille les porteurs</li>
+          </ul>
+        </div>
+        <div class="formula">β = i_C / i_B &nbsp;&nbsp;(amplification statique)</div>
+        <div class="key-rule"><strong>Règle :</strong> La jonction EB est polarisée en DIRECT, la jonction CB en INVERSE pour un fonctionnement normal en amplification.</div>
+      </div>
+    </div>
+
+    <!-- CHAPITRE 2 -->
+    <div class="chapter-card" id="ch2">
+      <div class="chapter-header" onclick="toggleChapter('ch2')">
+        <span class="chapter-num">CHAP 02</span>
+        <span class="chapter-title">Les diodes à semi-conducteurs</span>
+        <span class="chapter-chevron">▼</span>
+      </div>
+      <div class="chapter-body">
+
+        <h3>I. Principe de la diode</h3>
+        <div class="concept">
+          <h4>DÉFINITION</h4>
+          <p>La diode est le composant semi-conducteur le plus simple : une jonction PN avec deux électrodes (anode A côté P, cathode K côté N). Elle <strong>ne laisse passer le courant que dans un seul sens</strong>.</p>
+        </div>
+
+        <h3>II. Caractéristiques électriques</h3>
+        <div class="concept">
+          <h4>ÉQUATION DE SHOCKLEY</h4>
+          <p>Le courant dans la diode obéit à :</p>
+        </div>
+        <div class="formula">I_d = I_f · (e^(qV_d/kT) − 1)</div>
+        <div class="concept">
+          <h4>PARAMÈTRES CLÉS</h4>
+          <ul>
+            <li><strong>V₀</strong> (tension de seuil) : ~0,2V pour Ge, ~0,6V pour Si</li>
+            <li><strong>V_c</strong> : tension de claquage (inverse max)</li>
+            <li><strong>r_d = kT/qI_d</strong> : résistance dynamique (différentielle)</li>
+            <li>Coefficient de température : <strong>−2 mV/°C</strong> en direct</li>
+          </ul>
+        </div>
+
+        <h3>III. Types de diodes</h3>
+        <div class="concept">
+          <h4>DIODES DE REDRESSEMENT</h4>
+          <ul>
+            <li>Redressement <strong>simple alternance</strong> : 1 diode, une seule demi-onde passe</li>
+            <li>Redressement <strong>double alternance</strong> : pont de Graetz (4 diodes) ou transfo double enroulement</li>
+            <li><strong>Filtrage</strong> : condensateur en parallèle avec la charge → tension quasi-continue</li>
+          </ul>
+        </div>
+        <div class="formula">C (simple alt.) = I_max / (F·ΔV) &nbsp;|&nbsp; C (double alt.) = I_max / (2F·ΔV)</div>
+
+        <div class="concept">
+          <h4>DIODES ZENER</h4>
+          <p>Fonctionnent en polarisation inverse, à la tension de Zener V_z. Utilisées pour la <strong>régulation de tension</strong>.</p>
+          <ul>
+            <li>Effet Zener : &lt; 5V (coeff. temp. négatif)</li>
+            <li>Effet avalanche : &gt; 5V (coeff. temp. positif)</li>
+            <li>Autour de 5V : coeff. temp. ≈ 0 (idéal)</li>
+          </ul>
+        </div>
+        <div class="formula">r_d = Rz &nbsp;&nbsp;|&nbsp;&nbsp; Stabilisation amont: ΔV_z/ΔV_c ≈ Rz/(Rz+R)</div>
+
+        <div class="concept">
+          <h4>DIODES LED & AUTRES</h4>
+          <ul>
+            <li><strong>LED</strong> : arseniure de gallium, émission lumineuse en direct, 10–20 mA, V_F = 1,2 à 2V</li>
+            <li><strong>Schottky</strong> : jonction métal/semi-conducteur, très rapide, pas de stockage de charges</li>
+            <li><strong>Varicap</strong> : capacité variable selon la polarisation inverse</li>
+          </ul>
+        </div>
+
+        <div class="key-rule"><strong>Rappel redressement double alternance pont :</strong> Alternance positive → D1+D4 conduisent ; alternance négative → D2+D3 conduisent.</div>
+      </div>
+    </div>
+
+    <!-- CHAPITRE 3 -->
+    <div class="chapter-card" id="ch3">
+      <div class="chapter-header" onclick="toggleChapter('ch3')">
+        <span class="chapter-num">CHAP 03</span>
+        <span class="chapter-title">Transistors bipolaires à jonction</span>
+        <span class="chapter-chevron">▼</span>
+      </div>
+      <div class="chapter-body">
+
+        <h3>I. Relations fondamentales</h3>
+        <div class="formula">I_C = β·I_B &nbsp;&nbsp;|&nbsp;&nbsp; I_E = (β+1)·I_B &nbsp;&nbsp;|&nbsp;&nbsp; I_B = I_E − I_C</div>
+        <div class="concept">
+          <h4>GAIN EN COURANT β</h4>
+          <ul>
+            <li>5–10 : transistors de forte puissance</li>
+            <li>30–80 : transistors de moyenne puissance</li>
+            <li>100–500 : transistors de signal</li>
+          </ul>
+        </div>
+
+        <h3>II. Trois montages fondamentaux</h3>
+        <div class="schema-visual">
+          <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; text-align:center;">
+            <div style="border:1px solid var(--border); padding:12px; border-radius:8px;">
+              <div style="color:var(--accent); font-weight:700; margin-bottom:8px;">ÉMETTEUR COMMUN</div>
+              <div style="font-size:12px; color:var(--muted);">Entrée: Base<br>Sortie: Collecteur<br>Commun: Émetteur</div>
+              <div style="color:var(--accent2); font-size:11px; margin-top:8px;">Gain élevé<br>Inverseur de phase</div>
+            </div>
+            <div style="border:1px solid var(--border); padding:12px; border-radius:8px;">
+              <div style="color:var(--green); font-weight:700; margin-bottom:8px;">COLLECTEUR COMMUN</div>
+              <div style="font-size:12px; color:var(--muted);">Entrée: Base<br>Sortie: Émetteur<br>Commun: Collecteur</div>
+              <div style="color:var(--accent2); font-size:11px; margin-top:8px;">Gain ≈ 1<br>Adaptateur d'impédance</div>
+            </div>
+            <div style="border:1px solid var(--border); padding:12px; border-radius:8px;">
+              <div style="color:var(--accent3); font-weight:700; margin-bottom:8px;">BASE COMMUNE</div>
+              <div style="font-size:12px; color:var(--muted);">Entrée: Émetteur<br>Sortie: Collecteur<br>Commun: Base</div>
+              <div style="color:var(--accent2); font-size:11px; margin-top:8px;">Gain élevé<br>Haute fréquence</div>
+            </div>
+          </div>
+        </div>
+
+        <h3>III. Émetteur commun – Formules clés</h3>
+        <div class="formula">A_v = −β·R_c / h₁₁e &nbsp;&nbsp;ou&nbsp;&nbsp; A_v ≈ −38,5 · I_C0 · R_c</div>
+        <div class="formula">Z_e = R_p // h₁₁e &nbsp;&nbsp;|&nbsp;&nbsp; Z_s = R_c &nbsp;&nbsp;|&nbsp;&nbsp; h₁₁e ≈ 0,026/I_B0</div>
+        <div class="concept">
+          <h4>POLARISATION PAR PONT DE BASE (méthode standard)</h4>
+          <ul>
+            <li>Fixer I_C0 (courant de repos collecteur)</li>
+            <li>Fixer V_E0 (1–2V typiquement) → R_E = V_E0/I_C0</li>
+            <li>Fixer V_CE0 ≈ (E−V_E0)/2 → R_c = (E−V_E0−V_CE0)/I_C0</li>
+            <li>Courant du pont : I_P0 = 10·I_B0 = 10·I_C0/β</li>
+            <li>R_b2 = (V_E0+0,7)/I_P0 &nbsp;&nbsp;puis&nbsp;&nbsp; R_b1 = E/I_P0 − R_b2</li>
+          </ul>
+        </div>
+
+        <h3>IV. Collecteur commun (émetteur suiveur)</h3>
+        <div class="formula">A_v = (β+1)R_E / (h₁₁e + (β+1)R_E) ≈ 1</div>
+        <div class="concept">
+          <h4>CARACTÉRISTIQUES</h4>
+          <ul>
+            <li>Gain en tension ≈ 1 (légèrement inférieur)</li>
+            <li>Impédance d'entrée <strong>élevée</strong> : Z_e ≈ (β+1)R_E // R_p</li>
+            <li>Impédance de sortie <strong>faible</strong> : Z_s ≈ (R_g+h₁₁e)/(β+1)</li>
+            <li>Usage : <strong>adaptateur d'impédance</strong></li>
+          </ul>
+        </div>
+
+        <h3>V. Deux règles fondamentales</h3>
+        <div class="key-rule"><strong>Règle 1 :</strong> Tout ce qui est vu de la BASE et situé en aval de l'ÉMETTEUR est <strong>multiplié par β</strong>.</div>
+        <div class="key-rule"><strong>Règle 2 :</strong> Tout ce qui est vu de l'ÉMETTEUR et situé en amont est <strong>divisé par β</strong>.</div>
+
+        <h3>VI. Haute fréquence – Effet Miller</h3>
+        <div class="concept">
+          <h4>THÉORÈME DE MILLER</h4>
+          <p>Une impédance Z placée entre entrée et sortie d'un amplificateur de gain −A_v est vue de l'entrée comme <strong>Z·(A_v+1)</strong>.</p>
+          <p>→ La capacité C_BC (≈ 10pF) entre base et collecteur devient plus d'<strong>1 nF</strong> vue de l'entrée, limitant le fonctionnement en HF.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- ===================== RÉSUMÉS ===================== -->
+  <div class="section" id="resume">
+    <div class="chapter-card" style="overflow:visible;">
+      <div class="chapter-header" style="cursor:default;">
+        <span class="chapter-num">RÉSUMÉ</span>
+        <span class="chapter-title">Tableau comparatif des 3 montages transistor</span>
+      </div>
+      <div class="chapter-body" style="display:block;">
+        <table class="sum-table">
+          <thead>
+            <tr>
+              <th>PARAMÈTRE</th>
+              <th>ÉMETTEUR COMMUN</th>
+              <th>COLLECTEUR COMMUN</th>
+              <th>BASE COMMUNE</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Gain A_v</strong></td>
+              <td>Élevé (centaines), inverseur</td>
+              <td>≈ 1 (légèrement &lt; 1), non-inverseur</td>
+              <td>Élevé, non-inverseur</td>
+            </tr>
+            <tr>
+              <td><strong>Z entrée</strong></td>
+              <td>Moyenne (quelques kΩ)</td>
+              <td>Très élevée (dizaines–centaines kΩ)</td>
+              <td>Très faible (quelques dizaines Ω)</td>
+            </tr>
+            <tr>
+              <td><strong>Z sortie</strong></td>
+              <td>Assez élevée (= R_c)</td>
+              <td>Faible (quelques dizaines Ω)</td>
+              <td>Élevée (= R_c)</td>
+            </tr>
+            <tr>
+              <td><strong>Usage principal</strong></td>
+              <td>Amplificateur de base</td>
+              <td>Adaptateur d'impédance</td>
+              <td>Haute fréquence</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="chapter-card" style="overflow:visible;">
+      <div class="chapter-header" style="cursor:default;">
+        <span class="chapter-num">RÉSUMÉ</span>
+        <span class="chapter-title">Types de diodes et leurs applications</span>
+      </div>
+      <div class="chapter-body" style="display:block;">
+        <table class="sum-table">
+          <thead>
+            <tr><th>TYPE</th><th>CARACTÉRISTIQUE</th><th>APPLICATION</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Redressement standard</td><td>V_R : 50–1000V, I_F : 1A–centaines A</td><td>Redressement secteur, alimentation</td></tr>
+            <tr><td>Rapide (Schottky)</td><td>Pas de stockage de charges, très rapide</td><td>Circuits logiques rapides, TTL, puissance</td></tr>
+            <tr><td>Zener</td><td>Claquage inverse contrôlé, V_z stable</td><td>Régulation de tension, écrêtage</td></tr>
+            <tr><td>LED</td><td>Émet lumière en direct, V_F=1,2–2V</td><td>Indicateurs, afficheurs, télécommandes IR</td></tr>
+            <tr><td>Varicap</td><td>Capacité variable avec polarisation inverse</td><td>Circuits accordables, oscillateurs</td></tr>
+            <tr><td>Avalanche contrôlée</td><td>Supporte l'avalanche sans destruction</td><td>Protection contre surtensions</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="chapter-card" style="overflow:visible;">
+      <div class="chapter-header" style="cursor:default;">
+        <span class="chapter-num">RÉSUMÉ</span>
+        <span class="chapter-title">Formules essentielles à retenir</span>
+      </div>
+      <div class="chapter-body" style="display:block;">
+        <table class="sum-table">
+          <thead><tr><th>FORMULE</th><th>NOM</th><th>CONTEXTE</th></tr></thead>
+          <tbody>
+            <tr><td style="font-family:var(--mono); color:var(--accent2);">I_d = I_f(e^(qV/kT)−1)</td><td>Équation de Shockley</td><td>Caractéristique de la diode</td></tr>
+            <tr><td style="font-family:var(--mono); color:var(--accent2);">r_d = kT/qI_d ≈ 0,026/I_d</td><td>Résistance dynamique</td><td>Diode en petit signal</td></tr>
+            <tr><td style="font-family:var(--mono); color:var(--accent2);">C = I_max/(F·ΔV)</td><td>Condensateur de filtrage</td><td>Redressement simple alternance</td></tr>
+            <tr><td style="font-family:var(--mono); color:var(--accent2);">β = I_C/I_B</td><td>Gain statique en courant</td><td>Transistor bipolaire</td></tr>
+            <tr><td style="font-family:var(--mono); color:var(--accent2);">A_v ≈ −38,5·I_C0·R_c</td><td>Gain émetteur commun</td><td>Petit signal, émetteur commun</td></tr>
+            <tr><td style="font-family:var(--mono); color:var(--accent2);">h₁₁e ≈ 0,026/I_B0</td><td>Résistance d'entrée transistor</td><td>Paramètre hybride base-émetteur</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== EXERCICES ===================== -->
+  <div class="section" id="exercices">
+
+    <!-- EX 1 MCQ -->
+    <div class="exercise">
+      <div class="ex-header">
+        <span class="ex-num">EX 01</span>
+        <span class="ex-title">Semi-conducteurs – QCM</span>
+        <span class="diff-badge diff-easy">FACILE</span>
+      </div>
+      <div class="ex-body">
+        <div class="ex-question"><p><strong>Q1.</strong> Dans un semi-conducteur de type N, les porteurs majoritaires sont :</p></div>
+        <div class="mcq-options" id="q1">
+          <div class="mcq-opt" onclick="answerMCQ('q1','a','b')"><span class="opt-letter">A</span> Les trous (+)</div>
+          <div class="mcq-opt" onclick="answerMCQ('q1','b','b')"><span class="opt-letter">B</span> Les électrons libres (–)</div>
+          <div class="mcq-opt" onclick="answerMCQ('q1','c','b')"><span class="opt-letter">C</span> Les ions fixes</div>
+          <div class="mcq-opt" onclick="answerMCQ('q1','d','b')"><span class="opt-letter">D</span> Les photons</div>
+        </div>
+
+        <div class="ex-question" style="margin-top:20px;"><p><strong>Q2.</strong> La jonction PN polarisée en sens inverse est :</p></div>
+        <div class="mcq-options" id="q2">
+          <div class="mcq-opt" onclick="answerMCQ('q2','a','a')"><span class="opt-letter">A</span> Bloquée (seul I_S très faible circule)</div>
+          <div class="mcq-opt" onclick="answerMCQ('q2','b','a')"><span class="opt-letter">B</span> Conductrice</div>
+          <div class="mcq-opt" onclick="answerMCQ('q2','c','a')"><span class="opt-letter">C</span> Neutre, aucun courant</div>
+          <div class="mcq-opt" onclick="answerMCQ('q2','d','a')"><span class="opt-letter">D</span> En court-circuit</div>
+        </div>
+
+        <div class="ex-question" style="margin-top:20px;"><p><strong>Q3.</strong> La tension de seuil du silicium est approximativement :</p></div>
+        <div class="mcq-options" id="q3">
+          <div class="mcq-opt" onclick="answerMCQ('q3','a','b')"><span class="opt-letter">A</span> 0,2 V</div>
+          <div class="mcq-opt" onclick="answerMCQ('q3','b','b')"><span class="opt-letter">B</span> 0,6 – 0,7 V</div>
+          <div class="mcq-opt" onclick="answerMCQ('q3','c','b')"><span class="opt-letter">C</span> 1,4 V</div>
+          <div class="mcq-opt" onclick="answerMCQ('q3','d','b')"><span class="opt-letter">D</span> 5 V</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EX 2 Calcul diode -->
+    <div class="exercise">
+      <div class="ex-header">
+        <span class="ex-num">EX 02</span>
+        <span class="ex-title">Calcul de résistance dynamique d'une diode</span>
+        <span class="diff-badge diff-easy">FACILE</span>
+      </div>
+      <div class="ex-body">
+        <div class="ex-question">
+          <p>Une diode au silicium est polarisée en direct avec un courant I_d = 20 mA à la température ambiante (T = 300 K).</p>
+          <ol>
+            <li>Calculer la résistance dynamique r_d de cette diode.</li>
+            <li>Si la température monte à 60°C, que devient la tension directe V_d (sachant V_d0 = 0,65 V à 25°C) ?</li>
+          </ol>
+        </div>
+        <button class="reveal-btn" onclick="toggleAnswer('ans2')">▶ Voir la solution</button>
+        <div class="answer-box" id="ans2">
+          <strong>1. Résistance dynamique :</strong><br>
+          r_d = kT/qI_d ≈ 0,026 / I_d = 0,026 / 0,020 = <strong>1,3 Ω</strong><br><br>
+          <strong>2. Effet de la température :</strong><br>
+          Coefficient de température = −2 mV/°C<br>
+          ΔT = 60 − 25 = 35°C<br>
+          ΔV_d = −2 × 35 = −70 mV<br>
+          V_d(60°C) = 0,65 − 0,070 = <strong>0,58 V</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- EX 3 Redressement -->
+    <div class="exercise">
+      <div class="ex-header">
+        <span class="ex-num">EX 03</span>
+        <span class="ex-title">Dimensionnement d'un redresseur double alternance</span>
+        <span class="diff-badge diff-medium">MOYEN</span>
+      </div>
+      <div class="ex-body">
+        <div class="ex-question">
+          <p>On veut alimenter une charge avec : V_continu = 12 V, I_max = 500 mA, ondulation max ΔV = 1 V. Le secteur est à 50 Hz.</p>
+          <ol>
+            <li>Quel montage de redressement choisir ? Pourquoi ?</li>
+            <li>Calculer la valeur du condensateur de filtrage C.</li>
+            <li>Quelle tension crête V_R minimum doivent supporter les diodes ?</li>
+            <li>Quelle tension secondaire de transformateur faut-il choisir (valeur efficace) ?</li>
+          </ol>
+        </div>
+        <button class="reveal-btn" onclick="toggleAnswer('ans3')">▶ Voir la solution</button>
+        <div class="answer-box" id="ans3">
+          <strong>1. Montage :</strong> Pont de Graetz (double alternance), car le condensateur sera 2× plus petit qu'en simple alternance, et on n'a pas besoin d'un transfo à double enroulement.<br><br>
+          <strong>2. Condensateur :</strong><br>
+          C = I_max / (2 × F × ΔV) = 0,5 / (2 × 50 × 1) = <strong>5 000 µF</strong> (prendre 4 700 µF ou 6 800 µF en série E6)<br><br>
+          <strong>3. Tension inverse diodes :</strong><br>
+          En pont de Graetz : V_R ≥ tension crête du secondaire ≈ 12 + 2×0,7 ≈ 13,4 V crête<br>
+          Choisir des diodes avec V_R ≥ <strong>25 V minimum</strong> (marge de sécurité).<br><br>
+          <strong>4. Tension secondaire efficace :</strong><br>
+          V_crête_secondaire = V_continu + 2×V_F + ΔV/2 = 12 + 1,4 + 0,5 = 13,9 V crête<br>
+          V_efficace = 13,9 / √2 ≈ <strong>9,8 V eff</strong> → choisir transfo <strong>12 V eff</strong> (valeur standard)
+        </div>
+      </div>
+    </div>
+
+    <!-- EX 4 Zener -->
+    <div class="exercise">
+      <div class="ex-header">
+        <span class="ex-num">EX 04</span>
+        <span class="ex-title">Régulateur à diode Zener</span>
+        <span class="diff-badge diff-medium">MOYEN</span>
+      </div>
+      <div class="ex-body">
+        <div class="ex-question">
+          <p>On dispose d'une diode Zener BZX55C5V1 : V_z = 5,1 V, I_zm = 70 mA, r_z = 15 Ω. La tension d'alimentation est V_c = 12 V ± 10%, la charge R_u varie de 200 Ω à ∞.</p>
+          <ol>
+            <li>Calculer la résistance de polarisation R pour que la zener soit toujours en régulation (I_z &gt; 0 dans tous les cas).</li>
+            <li>Vérifier que I_zm n'est pas dépassé.</li>
+            <li>Calculer le coefficient de stabilisation amont ΔV_z/ΔV_c.</li>
+          </ol>
+        </div>
+        <button class="reveal-btn" onclick="toggleAnswer('ans4')">▶ Voir la solution</button>
+        <div class="answer-box" id="ans4">
+          <strong>1. Calcul de R :</strong><br>
+          Cas critique : V_c min = 10,8 V, R_u = 200 Ω (charge max)<br>
+          I_u_max = V_z / R_u = 5,1 / 200 = 25,5 mA<br>
+          Pour I_z > 0 : R &lt; (V_c_min − V_z) / I_u_max = (10,8 − 5,1) / 0,0255 = 224 Ω<br>
+          On choisit <strong>R = 180 Ω</strong> (valeur E12 inférieure).<br><br>
+          <strong>2. Vérification I_zm :</strong><br>
+          Cas pire : V_c max = 13,2 V, R_u = ∞ (charge nulle)<br>
+          I_z_max = (13,2 − 5,1) / 180 = 8,1/180 ≈ <strong>45 mA &lt; 70 mA ✓</strong><br><br>
+          <strong>3. Stabilisation amont :</strong><br>
+          ΔV_z/ΔV_c ≈ r_z / (r_z + R) = 15 / (15 + 180) = 15/195 ≈ <strong>0,077 (soit ~7,7%)</strong><br>
+          Une variation de 10% de V_c se traduit par ~0,77% de variation sur V_z.
+        </div>
+      </div>
+    </div>
+
+    <!-- EX 5 Transistor MCQ -->
+    <div class="exercise">
+      <div class="ex-header">
+        <span class="ex-num">EX 05</span>
+        <span class="ex-title">Transistor bipolaire – QCM</span>
+        <span class="diff-badge diff-easy">FACILE</span>
+      </div>
+      <div class="ex-body">
+        <div class="ex-question"><p><strong>Q4.</strong> Dans un transistor NPN en fonctionnement normal, quelle jonction est polarisée en DIRECT ?</p></div>
+        <div class="mcq-options" id="q4">
+          <div class="mcq-opt" onclick="answerMCQ('q4','a','b')"><span class="opt-letter">A</span> Jonction collecteur-base (CB)</div>
+          <div class="mcq-opt" onclick="answerMCQ('q4','b','b')"><span class="opt-letter">B</span> Jonction base-émetteur (BE)</div>
+          <div class="mcq-opt" onclick="answerMCQ('q4','c','b')"><span class="opt-letter">C</span> Les deux jonctions en direct</div>
+          <div class="mcq-opt" onclick="answerMCQ('q4','d','b')"><span class="opt-letter">D</span> Aucune jonction n'est polarisée</div>
+        </div>
+
+        <div class="ex-question" style="margin-top:20px;"><p><strong>Q5.</strong> Un transistor a β = 100. Si I_B = 50 µA, quel est I_C ?</p></div>
+        <div class="mcq-options" id="q5">
+          <div class="mcq-opt" onclick="answerMCQ('q5','a','c')"><span class="opt-letter">A</span> 500 µA</div>
+          <div class="mcq-opt" onclick="answerMCQ('q5','b','c')"><span class="opt-letter">B</span> 50 mA</div>
+          <div class="mcq-opt" onclick="answerMCQ('q5','c','c')"><span class="opt-letter">C</span> 5 mA</div>
+          <div class="mcq-opt" onclick="answerMCQ('q5','d','c')"><span class="opt-letter">D</span> 0,5 A</div>
+        </div>
+
+        <div class="ex-question" style="margin-top:20px;"><p><strong>Q6.</strong> Le montage collecteur commun (émetteur suiveur) est utilisé principalement pour :</p></div>
+        <div class="mcq-options" id="q6">
+          <div class="mcq-opt" onclick="answerMCQ('q6','a','b')"><span class="opt-letter">A</span> Amplifier fortement la tension</div>
+          <div class="mcq-opt" onclick="answerMCQ('q6','b','b')"><span class="opt-letter">B</span> Adapter les impédances (Z_e élevée, Z_s faible)</div>
+          <div class="mcq-opt" onclick="answerMCQ('q6','c','b')"><span class="opt-letter">C</span> Fonctionner uniquement en haute fréquence</div>
+          <div class="mcq-opt" onclick="answerMCQ('q6','d','b')"><span class="opt-letter">D</span> Inverser le signal</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EX 6 Polarisation transistor -->
+    <div class="exercise">
+      <div class="ex-header">
+        <span class="ex-num">EX 06</span>
+        <span class="ex-title">Polarisation par pont de base – Calcul complet</span>
+        <span class="diff-badge diff-hard">AVANCÉ</span>
+      </div>
+      <div class="ex-body">
+        <div class="ex-question">
+          <p>Données : E = 12 V, β = 100, I_C0 = 2 mA, V_CE0 = 5 V, V_E0 = 2 V.</p>
+          <ol>
+            <li>Calculer R_E, R_c, R_b2, R_b1.</li>
+            <li>Calculer h₁₁e et le gain en tension A_v à vide (émetteur commun, R_c connecté).</li>
+            <li>Calculer l'impédance d'entrée Z_e (R_p = R_b1 // R_b2).</li>
+          </ol>
+        </div>
+        <button class="reveal-btn" onclick="toggleAnswer('ans6')">▶ Voir la solution</button>
+        <div class="answer-box" id="ans6">
+          <strong>1. Éléments de polarisation :</strong><br>
+          R_E = V_E0/I_C0 = 2/0,002 = <strong>1 kΩ</strong><br>
+          R_c = (E − V_E0 − V_CE0)/I_C0 = (12−2−5)/0,002 = 5/0,002 = <strong>2,5 kΩ</strong><br>
+          I_B0 = I_C0/β = 2mA/100 = <strong>20 µA</strong><br>
+          I_P0 = 10 × I_B0 = <strong>200 µA</strong><br>
+          R_b2 = (V_E0+0,7)/I_P0 = 2,7/0,0002 = <strong>13,5 kΩ</strong><br>
+          R_b1 = E/I_P0 − R_b2 = 60 000 − 13 500 = <strong>46,5 kΩ</strong><br><br>
+          <strong>2. Gain en tension :</strong><br>
+          h₁₁e ≈ 0,026/I_B0 = 0,026/20×10⁻⁶ = <strong>1 300 Ω = 1,3 kΩ</strong><br>
+          A_v = −β×R_c/h₁₁e = −100×2 500/1 300 ≈ <strong>−192</strong><br>
+          (ou A_v ≈ −38,5×I_C0×R_c = −38,5×0,002×2 500 = −192,5 ✓)<br><br>
+          <strong>3. Impédance d'entrée :</strong><br>
+          R_p = R_b1 // R_b2 = 46 500 // 13 500 ≈ 10,4 kΩ<br>
+          Z_e = R_p // h₁₁e = 10 400 // 1 300 ≈ <strong>1,15 kΩ</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- EX 7 Analyse -->
+    <div class="exercise">
+      <div class="ex-header">
+        <span class="ex-num">EX 07</span>
+        <span class="ex-title">Analyse et comparaison des montages</span>
+        <span class="diff-badge diff-medium">MOYEN</span>
+      </div>
+      <div class="ex-body">
+        <div class="ex-question">
+          <p>Un capteur de pression délivre un signal de 10 mV avec une impédance de source de 100 kΩ. On veut amplifier ce signal avec un gain global de ×50. Deux étages sont disponibles :</p>
+          <ul style="padding-left:20px; margin:10px 0;">
+            <li><strong>Étage A</strong> : émetteur commun, A_v = −200, Z_e = 1,2 kΩ, Z_s = 3 kΩ</li>
+            <li><strong>Étage B</strong> : collecteur commun, A_v ≈ 1, Z_e = 80 kΩ, Z_s = 200 Ω</li>
+          </ul>
+          <ol>
+            <li>Pourquoi brancher le capteur directement sur l'étage A serait-il problématique ?</li>
+            <li>Proposer une architecture avec les deux étages pour résoudre ce problème.</li>
+            <li>Calculer le gain global de l'architecture proposée (tenir compte de l'effet de charge).</li>
+          </ol>
+        </div>
+        <button class="reveal-btn" onclick="toggleAnswer('ans7')">▶ Voir la solution</button>
+        <div class="answer-box" id="ans7">
+          <strong>1. Problème du branchement direct :</strong><br>
+          Le capteur (R_source = 100 kΩ) et l'étage A (Z_e = 1,2 kΩ) forment un diviseur de tension. Le signal reçu serait :<br>
+          V_e_réel = 10 mV × 1,2/(100+1,2) ≈ <strong>0,12 mV seulement</strong> (perte de 99% du signal !)<br><br>
+          <strong>2. Architecture proposée :</strong><br>
+          Capteur → <strong>Étage B (CC)</strong> → <strong>Étage A (EC)</strong> → Sortie<br>
+          L'étage B, avec sa Z_e élevée (80 kΩ), perturbe peu le capteur. Sa Z_s faible (200 Ω) attaque bien l'étage A.<br><br>
+          <strong>3. Gain global :</strong><br>
+          Capteur→B : V_e_B = 10 mV × 80/(100+80) = 10 × 0,44 = <strong>4,4 mV</strong><br>
+          Étage B (A_v ≈ 1) : V_s_B ≈ 4,4 mV<br>
+          Étage B→A : Z_s_B (200Ω) vs Z_e_A (1,2 kΩ) → V_e_A = 4,4 × 1200/1400 ≈ 3,77 mV<br>
+          Étage A (A_v = −200) : V_s = −200 × 3,77 mV ≈ <strong>−754 mV</strong><br>
+          Gain global = −754/10 ≈ <strong>−75</strong> (≈ ×75 en valeur absolue, légèrement supérieur à ×50)
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- Footer -->
+  <div style="text-align:center; padding:40px 0 20px; color:var(--muted); font-family:var(--mono); font-size:11px; letter-spacing:2px; border-top:1px solid var(--border); margin-top:32px;">
+   LICENCE 2 INFORMATIQUE · ÉLECTRONIQUE 2 · MODULE 2
+  </div>
+</div>
+</body>
+</html>
