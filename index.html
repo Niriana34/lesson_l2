@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mon Site</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ad-bg: #0a0a0f;
+    --accent: #104dbe;
+    --accent2: #7350f5;
+    --text: #f0ece4;
+    --muted: #6b6b7a;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #111118;
+    color: var(--text);
+    overflow: hidden;
+  }
+
+  /* ── OVERLAY PUBLICITAIRE ── */
+  #ad-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--ad-bg);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  #ad-overlay.hide {
+    opacity: 0;
+    transform: scale(1.04);
+    pointer-events: none;
+  }
+
+  /* Grain texture */
+  #ad-overlay::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
+  /* Glow accent */
+  .ad-glow {
+    position: absolute;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,77,0,0.18) 0%, transparent 70%);
+    top: -100px; right: -100px;
+    pointer-events: none;
+  }
+  .ad-glow2 {
+    position: absolute;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,149,0,0.12) 0%, transparent 70%);
+    bottom: -60px; left: -60px;
+    pointer-events: none;
+  }
+
+  .ad-card {
+    position: relative;
+    width: min(520px, 92vw);
+    background: linear-gradient(145deg, #16161f, #1a1a27);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 20px;
+    padding: 48px 44px 36px;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,77,0,0.08);
+    animation: cardIn 0.7s cubic-bezier(0.22,1,0.36,1) both;
+  }
+
+  @keyframes cardIn {
+    from { opacity: 0; transform: translateY(30px) scale(0.96); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .ad-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(0, 217, 255, 0.15);
+    border: 1px solid rgba(119, 0, 255, 0.3);
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 100px;
+    margin-bottom: 24px;
+    animation: fadeUp 0.6s 0.15s both;
+  }
+  .ad-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 1.5s infinite;
+  }
+  @keyframes pulse {
+    0%,100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.7); }
+  }
+
+  .ad-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(38px, 8vw, 58px);
+    line-height: 0.95;
+    letter-spacing: 0.01em;
+    margin-bottom: 16px;
+    animation: fadeUp 0.6s 0.25s both;
+  }
+  .ad-title span {
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .ad-desc {
+    font-size: 15px;
+    color: #9898aa;
+    line-height: 1.65;
+    margin-bottom: 32px;
+    animation: fadeUp 0.6s 0.35s both;
+  }
+
+  .ad-cta {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    padding: 14px 32px;
+    border-radius: 12px;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 8px 30px rgba(3, 128, 245, 0.35);
+    transition: transform 0.2s, box-shadow 0.2s;
+    animation: fadeUp 0.6s 0.45s both;
+  }
+  .ad-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(55, 0, 255, 0.5);
+  }
+
+  /* Compteur */
+  .ad-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    animation: fadeUp 0.6s 0.55s both;
+  }
+
+  #skip-btn {
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    padding: 6px 10px;
+    border-radius: 8px;
+    transition: color 0.2s, background 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  #skip-btn:not(:disabled):hover {
+    color: var(--text);
+    background: rgba(255,255,255,0.06);
+  }
+  #skip-btn:disabled { cursor: default; opacity: 0.5; }
+
+  #countdown-ring {
+    width: 36px; height: 36px;
+    flex-shrink: 0;
+  }
+  #countdown-ring circle {
+    fill: none;
+    stroke-width: 3;
+    stroke-linecap: round;
+  }
+  #ring-bg { stroke: rgba(255,255,255,0.08); }
+  #ring-fill {
+    stroke: var(--accent);
+    stroke-dasharray: 88;
+    stroke-dashoffset: 0;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+    transition: stroke-dashoffset 0.9s linear;
+  }
+  #countdown-num {
+    position: absolute;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .ring-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #countdown-num { position: absolute; }
+
+  .ad-sponsor {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SITE PRINCIPAL ── */
+  #main-site {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    opacity: 0;
+    transition: opacity 0.8s 0.3s ease;
+  }
+  #main-site.show { opacity: 1; }
+  #main-site h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    letter-spacing: 0.04em;
+  }
+  #main-site p { color: #666; font-size: 16px; }
+</style>
+</head>
+<body>
+
+<!-- ══ PUBLICITÉ / SPLASH ══ -->
+<div id="ad-overlay">
+  <div class="ad-glow"></div>
+  <div class="ad-glow2"></div>
+
+  <div class="ad-card">
+    <div class="ad-badge">Info</div>
+
+    <h2 class="ad-title">
+      info par<br><span>le créateur du site</span>
+    </h2>
+
+    <p class="ad-desc">
+      Ce site est gratuit, dédié aux étudiants de CNTEMAD, crée par un étudiant donc ne tentez pas de vendre ce site ou d'obtenir un profit personnel à partir de ce site.
+    </p>
+
+    <a href="https://niriana34.github.io/portfolio-niriana/"><button class="ad-cta" onclick="closeAd()">Visiter le portfolio du créateur</button></a><br>
+    <a href="https://wa.me/+261384513912?text=Bonjour Niriana%2C Je voudrais collaborer avec vous"><button class="ad-cta" onclick="closeAd()">Pour contacter le créateur</button></a>
+     <a href="tel: %23111*1*2*0381170244%23"><button class="ad-cta" onclick="closeAd()">Pour faire un donation</button></a>
+    <div class="ad-footer">
+      <span class="ad-sponsor">Attention</span>
+
+      <div style="display:flex; align-items:center; gap:10px;">
+        <button id="skip-btn" disabled onclick="closeAd()">
+          Passer
+        </button>
+        <div class="ring-wrap">
+          <svg id="countdown-ring" viewBox="0 0 36 36">
+            <circle class="ring-bg" id="ring-bg" cx="18" cy="18" r="14"/>
+            <circle id="ring-fill" cx="18" cy="18" r="14"/>
+          </svg>
+          <span id="countdown-num">10</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SITE PRINCIPAL ══ -->
+<div id="main-site">
+  <h1>Bienvenue sur mon site 🎮</h1>
+  <p>La publicité est terminée — contenu principal chargé.</p>
+</div>
+
+<script>
+  const DURATION = 10; // secondes avant pouvoir skip
+  let remaining = DURATION;
+
+  const skipBtn   = document.getElementById('skip-btn');
+  const ringFill  = document.getElementById('ring-fill');
+  const num       = document.getElementById('countdown-num');
+  const circumf   = 2 * Math.PI * 14; // ≈ 87.96
+
+  ringFill.style.strokeDasharray  = circumf;
+  ringFill.style.strokeDashoffset = 0;
+
+  // Tick chaque seconde
+  const timer = setInterval(() => {
+    remaining--;
+    num.textContent = remaining;
+
+    // Anneau qui se vide
+    const progress = remaining / DURATION;           // 1 → 0
+    ringFill.style.strokeDashoffset = circumf * (1 - progress);
+
+    if (remaining <= 0) {
+      clearInterval(timer);
+      skipBtn.disabled = false;
+      skipBtn.innerHTML = 'Passer <span style="opacity:.6">›</span>';
+      num.textContent = '✓';
+      ringFill.style.stroke = '#4caf50';
+    }
+  }, 1000);
+
+  function closeAd() {
+    const overlay = document.getElementById('ad-overlay');
+    const site    = document.getElementById('main-site');
+
+    overlay.classList.add('hide');
+    setTimeout(() => {
+      overlay.style.display = 'none';
+      site.classList.add('show');
+    }, 650);
+
+  window.location.href = 'acceuil.html';
+  }
+</script>
+</body>
+</html>

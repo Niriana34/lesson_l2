@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mathématiques III — Cours Interactif</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=JetBrains+Mono:wght@400;600&family=Source+Serif+4:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style2.css">
+<script src="script2.js" defer></script>
+</head>
+<body>
+
+<header>
+  <div class="header-badge">Mathématiques II Part 1</div>
+  <h1>Probabilités &amp; Statistiques</h1>
+  <p>Cours interactif — Dénombrements · Variables aléatoires · Loi normale</p>
+  <nav class="chapter-nav">
+    <button class="chapter-btn active" onclick="showSection('home')" data-sec="home"><span>🏠 Accueil</span></button>
+    <button class="chapter-btn" onclick="showSection('ch1')" data-sec="ch1"><span>📊 Dénombrements</span></button>
+    <button class="chapter-btn" onclick="showSection('ch2')" data-sec="ch2"><span>🎲 Espaces probabilisés</span></button>
+    <button class="chapter-btn" onclick="showSection('ch3')" data-sec="ch3"><span>🔢 Variables discrètes</span></button>
+    <button class="chapter-btn" onclick="showSection('ch4')" data-sec="ch4"><span>📈 Loi binomiale &amp; Poisson</span></button>
+    <button class="chapter-btn" onclick="showSection('ch5')" data-sec="ch5"><span>🔔 Loi normale</span></button>
+    <button class="chapter-btn" onclick="showSection('ex')" data-sec="ex"><span>✏️ Exercices</span></button>
+  </nav>
+</header>
+
+<div class="app">
+
+<!-- HOME -->
+<div id="home" class="section active">
+  <div class="section-spacer"></div>
+  <div class="overview-grid">
+    <div class="overview-card" onclick="showSection('ch1')">
+      <div class="big-icon">🔢</div>
+      <div class="num">Chapitre 01</div>
+      <h3>Dénombrements</h3>
+      <p>Arrangements, permutations, combinaisons et formule du binôme de Newton.</p>
+      <div class="topics">
+        <span class="topic-chip">Arrangements</span>
+        <span class="topic-chip">Permutations</span>
+        <span class="topic-chip">Combinaisons</span>
+        <span class="topic-chip">Binôme Newton</span>
+      </div>
+    </div>
+    <div class="overview-card" onclick="showSection('ch2')">
+      <div class="big-icon">🎲</div>
+      <div class="num">Chapitre 02</div>
+      <h3>Espaces Probabilisés Finis</h3>
+      <p>Univers, événements, probabilités conditionnelles, indépendance.</p>
+      <div class="topics">
+        <span class="topic-chip">Univers Ω</span>
+        <span class="topic-chip">Événements</span>
+        <span class="topic-chip">P(A∩B)</span>
+        <span class="topic-chip">Indépendance</span>
+      </div>
+    </div>
+    <div class="overview-card" onclick="showSection('ch3')">
+      <div class="big-icon">📊</div>
+      <div class="num">Chapitre 03</div>
+      <h3>Variables Aléatoires Discrètes</h3>
+      <p>Loi de probabilité, espérance, variance, écart-type, fonction de répartition.</p>
+      <div class="topics">
+        <span class="topic-chip">E(X)</span>
+        <span class="topic-chip">V(X)</span>
+        <span class="topic-chip">σ(X)</span>
+        <span class="topic-chip">F(x)</span>
+      </div>
+    </div>
+    <div class="overview-card" onclick="showSection('ch4')">
+      <div class="big-icon">🎯</div>
+      <div class="num">Chapitre 04</div>
+      <h3>Lois Binomiale &amp; Poisson</h3>
+      <p>Épreuve de Bernoulli, loi B(n,p), loi de Poisson P(λ), approximations.</p>
+      <div class="topics">
+        <span class="topic-chip">Bernoulli</span>
+        <span class="topic-chip">B(n,p)</span>
+        <span class="topic-chip">P(λ)</span>
+        <span class="topic-chip">Approximation</span>
+      </div>
+    </div>
+    <div class="overview-card" onclick="showSection('ch5')">
+      <div class="big-icon">🔔</div>
+      <div class="num">Chapitre 05</div>
+      <h3>Variables Continues &amp; Loi Normale</h3>
+      <p>Densité de probabilité, loi N(m,σ), ajustement gaussien, échantillonnages.</p>
+      <div class="topics">
+        <span class="topic-chip">Densité f(x)</span>
+        <span class="topic-chip">N(0,1)</span>
+        <span class="topic-chip">TLC</span>
+        <span class="topic-chip">Échantillons</span>
+      </div>
+    </div>
+    <div class="overview-card" onclick="showSection('ex')">
+      <div class="big-icon">✏️</div>
+      <div class="num">Exercices corrigés</div>
+      <h3>Entraînement</h3>
+      <p>Exercices classiques des 5 chapitres avec solutions détaillées étape par étape.</p>
+      <div class="topics">
+        <span class="topic-chip">Niveau 1</span>
+        <span class="topic-chip">Niveau 2</span>
+        <span class="topic-chip">Niveau 3</span>
+        <span class="topic-chip">Corrigés</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card blue">
+    <h3>📌 Comment utiliser ce cours ? <span class="tag def">GUIDE</span></h3>
+    <p>Chaque chapitre contient trois onglets : <strong style="color:var(--accent1)">Cours</strong> (définitions et théorèmes), <strong style="color:var(--accent2)">Récapitulatif</strong> (tableau synthèse des formules clés) et <strong style="color:var(--accent3)">Exemples</strong> (applications numériques commentées).</p>
+    <p>Les exercices corrigés sont accessibles via l'onglet <strong style="color:var(--success)">Exercices</strong>. Clique sur chaque exercice pour le développer, puis sur <em>Voir la solution</em> pour vérifier.</p>
+  </div>
+</div>
+
+<!-- CH1: DÉNOMBREMENTS -->
+<div id="ch1" class="section">
+  <div class="section-title">
+    <div class="section-icon" style="background:rgba(91,141,238,0.15);">🔢</div>
+    <div>
+      <h2>Dénombrements</h2>
+      <p>Compter les éléments d'un ensemble vérifiant une propriété</p>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab(this,'ch1','cours')">📖 Cours</button>
+    <button class="tab" onclick="switchTab(this,'ch1','recap')">📋 Récapitulatif</button>
+    <button class="tab" onclick="switchTab(this,'ch1','exemples')">🔍 Exemples</button>
+  </div>
+
+  <div id="ch1-cours">
+    <div class="card blue">
+      <h3>Principe fondamental <span class="tag def">DEF</span></h3>
+      <p>Avant de compter, toujours se poser la question : <strong style="color:var(--accent2)">l'ordre intervient-il ?</strong></p>
+      <div class="info-grid">
+        <div class="info-box">
+          <div class="label">OUI, l'ordre compte</div>
+          <div class="value" style="color:var(--accent2)">Arrangement</div>
+          <div class="sub">Désignation de postes distincts, tirages successifs sans remise</div>
+        </div>
+        <div class="info-box">
+          <div class="label">NON, l'ordre ne compte pas</div>
+          <div class="value" style="color:var(--accent3)">Combinaison</div>
+          <div class="sub">Choix d'un sous-ensemble (personnes, cartes, boules...)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card gold">
+      <h3>Arrangements <span class="tag def">DEF</span></h3>
+      <p>Un arrangement d'ordre p parmi n éléments est un sous-ensemble <em>ordonné</em> de p éléments pris parmi n.</p>
+      <div class="formula">A<sup>p</sup><sub>n</sub> = n × (n−1) × (n−2) × … × (n−p+1) = n! / (n−p)!</div>
+      <div class="highlight"><strong>Cas particulier — Permutations :</strong> Quand p = n (on ordonne tous les éléments) :<br>P<sub>n</sub> = A<sup>n</sup><sub>n</sub> = n!</div>
+    </div>
+
+    <div class="card teal">
+      <h3>Combinaisons <span class="tag def">DEF</span></h3>
+      <p>Une combinaison d'ordre p parmi n éléments est un sous-ensemble <em>non ordonné</em> de p éléments.</p>
+      <div class="formula">C<sup>p</sup><sub>n</sub> = A<sup>p</sup><sub>n</sub> / p! = n! / [p! × (n−p)!]</div>
+      <p>On dit aussi : « p parmi n » ou coefficient binomial. Propriétés utiles :</p>
+      <ul class="concept-list">
+        <li>C<sup>0</sup><sub>n</sub> = C<sup>n</sup><sub>n</sub> = 1</li>
+        <li>C<sup>p</sup><sub>n</sub> = C<sup>n−p</sup><sub>n</sub> (symétrie)</li>
+        <li>C<sup>p</sup><sub>n</sub> + C<sup>p+1</sup><sub>n</sub> = C<sup>p+1</sup><sub>n+1</sub> (triangle de Pascal)</li>
+      </ul>
+    </div>
+
+    <div class="card red">
+      <h3>Formule du binôme de Newton <span class="tag thm">THM</span></h3>
+      <div class="formula">(a+b)<sup>n</sup> = Σ<sub>p=0→n</sub> C<sup>p</sup><sub>n</sub> · a<sup>n−p</sup> · b<sup>p</sup></div>
+      <p>Cas particulier : en posant a = b = 1 → <span class="mono">2<sup>n</sup> = Σ C<sup>p</sup><sub>n</sub></span> (somme de tous les coefficients binomiaux de la ligne n).</p>
+    </div>
+  </div>
+
+  <div id="ch1-recap" style="display:none">
+    <div class="card blue">
+      <h3>📋 Tableau de synthèse — Dénombrements</h3>
+      <table class="recap-table">
+        <tr><th>Notion</th><th>Formule</th><th>Quand l'utiliser</th></tr>
+        <tr><td>Arrangement A<sup>p</sup><sub>n</sub></td><td class="mono">n!/(n−p)!</td><td>Sous-ensemble ordonné, postes distincts</td></tr>
+        <tr><td>Permutation P<sub>n</sub></td><td class="mono">n!</td><td>Ordonner tous les éléments</td></tr>
+        <tr><td>Combinaison C<sup>p</sup><sub>n</sub></td><td class="mono">n!/[p!(n−p)!]</td><td>Sous-ensemble non ordonné, tirage simultané</td></tr>
+        <tr><td>Produit de combinaisons</td><td class="mono">C<sup>a</sup><sub>n</sub> × C<sup>b</sup><sub>m</sub></td><td>Choisir a dans un groupe ET b dans un autre</td></tr>
+        <tr><td>Binôme de Newton</td><td class="mono">Σ C<sup>p</sup><sub>n</sub>·a<sup>n-p</sup>·b<sup>p</sup></td><td>Développer (a+b)<sup>n</sup></td></tr>
+      </table>
+    </div>
+    <div class="card gold">
+      <h3>⚡ Règle de décision rapide</h3>
+      <div class="highlight">
+        <strong>→ Rangement, désignation, tirage successif sans remise :</strong> Arrangement<br>
+        <strong>→ Ordonner tous les éléments :</strong> Permutation<br>
+        <strong>→ Choisir un groupe sans se soucier de l'ordre :</strong> Combinaison<br>
+        <strong>→ Choisir dans deux groupes distincts :</strong> Produit de combinaisons
+      </div>
+    </div>
+  </div>
+
+  <div id="ch1-exemples" style="display:none">
+    <div class="card green">
+      <h3>Exemple 1 — Bureau de 27 personnes <span class="tag ex">EX</span></h3>
+      <p>Combien de façons de choisir un président, vice-président, secrétaire et trésorier parmi 27 personnes ?</p>
+      <div class="highlight">L'ordre intervient (4 postes distincts) → Arrangement A<sup>4</sup><sub>27</sub></div>
+      <div class="formula">N = A<sup>4</sup><sub>27</sub> = 27 × 26 × 25 × 24 = <strong style="color:var(--accent2)">421 000</strong></div>
+    </div>
+    <div class="card green">
+      <h3>Exemple 2 — Jeu de 32 cartes <span class="tag ex">EX</span></h3>
+      <p>Combien de jeux de 5 cartes peut-on former dans un jeu de 32 cartes ?</p>
+      <div class="highlight">L'ordre n'intervient pas → Combinaison C<sup>5</sup><sub>32</sub></div>
+      <div class="formula">C<sup>5</sup><sub>32</sub> = (32×31×30×29×28)/(5×4×3×2×1) = <strong style="color:var(--accent2)">201 376</strong></div>
+    </div>
+    <div class="card green">
+      <h3>Exemple 3 — 5 chiffres avec {1,2,3,4,5} <span class="tag ex">EX</span></h3>
+      <p>Combien de nombres à 5 chiffres distincts peut-on former avec {1,2,3,4,5} ?</p>
+      <div class="highlight">On ordonne tous les 5 éléments → Permutation P<sub>5</sub></div>
+      <div class="formula">N = P<sub>5</sub> = 5! = 5×4×3×2×1 = <strong style="color:var(--accent2)">120</strong></div>
+    </div>
+  </div>
+</div>
+
+<!-- CH2: ESPACES PROBABILISÉS -->
+<div id="ch2" class="section">
+  <div class="section-title">
+    <div class="section-icon" style="background:rgba(232,168,56,0.15);">🎲</div>
+    <div>
+      <h2>Espaces Probabilisés Finis</h2>
+      <p>Univers, événements, probabilités et leurs propriétés</p>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab(this,'ch2','cours')">📖 Cours</button>
+    <button class="tab" onclick="switchTab(this,'ch2','recap')">📋 Récapitulatif</button>
+    <button class="tab" onclick="switchTab(this,'ch2','exemples')">🔍 Exemples</button>
+  </div>
+
+  <div id="ch2-cours">
+    <div class="card blue">
+      <h3>Vocabulaire fondamental <span class="tag def">DEF</span></h3>
+      <ul class="concept-list">
+        <li><strong style="color:var(--text3)">Univers Ω</strong> : ensemble de tous les résultats possibles d'une expérience aléatoire.</li>
+        <li><strong style="color:var(--text3)">Événement</strong> : toute partie (sous-ensemble) de Ω. Noté P(Ω) l'ensemble de tous les événements.</li>
+        <li><strong style="color:var(--text3)">Événement élémentaire</strong> : événement à un seul élément {ω}.</li>
+        <li><strong style="color:var(--text3)">Événement impossible</strong> : ∅ (ensemble vide).</li>
+        <li><strong style="color:var(--text3)">Événement certain</strong> : Ω lui-même.</li>
+        <li><strong style="color:var(--text3)">Événement contraire de A</strong> : Ā = Ω \ A (complémentaire de A).</li>
+      </ul>
+    </div>
+
+    <div class="card gold">
+      <h3>Opérations sur les événements <span class="tag prop">PROP</span></h3>
+      <div class="two-col">
+        <div class="info-box">
+          <div class="label">A ou B</div>
+          <div class="value" style="font-size:18px; color:var(--accent1)">A ∪ B</div>
+          <div class="sub">Au moins l'un des deux est réalisé</div>
+        </div>
+        <div class="info-box">
+          <div class="label">A et B</div>
+          <div class="value" style="font-size:18px; color:var(--accent3)">A ∩ B</div>
+          <div class="sub">Les deux sont réalisés simultanément</div>
+        </div>
+      </div>
+      <div class="highlight">
+        <strong>Événements incompatibles :</strong> A et B sont incompatibles si et seulement si A ∩ B = ∅<br>
+        <strong>Lois de De Morgan :</strong> <span class="mono">Ā∪B̄ = Ā∩B̄</span> et <span class="mono">Ā∩B̄ = Ā∪B̄</span>
+      </div>
+    </div>
+
+    <div class="card teal">
+      <h3>Définition d'une probabilité <span class="tag def">DEF</span></h3>
+      <p>Une probabilité sur Ω est une application P : P(Ω) → [0,1] vérifiant :</p>
+      <ul class="concept-list">
+        <li>P(Ω) = 1</li>
+        <li>Si A ∩ B = ∅ alors P(A ∪ B) = P(A) + P(B)</li>
+      </ul>
+      <div class="formula">P(Ā) = 1 − P(A) &nbsp;|&nbsp; P(∅) = 0</div>
+    </div>
+
+    <div class="card blue">
+      <h3>Équiprobabilité <span class="tag thm">THM</span></h3>
+      <p>Si tous les événements élémentaires ont la même probabilité (univers fini de cardinal n) :</p>
+      <div class="formula">P({ωᵢ}) = 1/n &nbsp;&nbsp;et&nbsp;&nbsp; P(A) = card(A) / card(Ω) = <strong>cas favorables / cas possibles</strong></div>
+    </div>
+
+    <div class="card gold">
+      <h3>Théorème général — P(A∪B) <span class="tag thm">THM</span></h3>
+      <div class="formula">P(A ∪ B) = P(A) + P(B) − P(A ∩ B)</div>
+      <p>Si A et B sont incompatibles (A ∩ B = ∅), on retrouve P(A ∪ B) = P(A) + P(B).</p>
+    </div>
+
+    <div class="card red">
+      <h3>Probabilité conditionnelle <span class="tag def">DEF</span></h3>
+      <p>La probabilité de B sachant que A est réalisé (P(A) ≠ 0) :</p>
+      <div class="formula">P<sub>A</sub>(B) = P(A ∩ B) / P(A)</div>
+      <div class="highlight"><strong>Formule des probabilités composées :</strong> P(A ∩ B) = P(A) × P<sub>A</sub>(B)</div>
+    </div>
+
+    <div class="card teal">
+      <h3>Événements indépendants <span class="tag def">DEF</span></h3>
+      <p>A et B sont indépendants si et seulement si :</p>
+      <div class="formula">P(A ∩ B) = P(A) × P(B)</div>
+      <p>Conséquence : si A et B sont indépendants, alors P<sub>A</sub>(B) = P(B). La réalisation de A n'influe pas sur B.</p>
+    </div>
+  </div>
+
+  <div id="ch2-recap" style="display:none">
+    <div class="card blue">
+      <h3>📋 Formules essentielles — Probabilités</h3>
+      <table class="recap-table">
+        <tr><th>Propriété</th><th>Formule</th></tr>
+        <tr><td>Événement contraire</td><td class="mono">P(Ā) = 1 − P(A)</td></tr>
+        <tr><td>Événement impossible</td><td class="mono">P(∅) = 0</td></tr>
+        <tr><td>Événement certain</td><td class="mono">P(Ω) = 1</td></tr>
+        <tr><td>Union (cas général)</td><td class="mono">P(A∪B) = P(A)+P(B)−P(A∩B)</td></tr>
+        <tr><td>Union incompatibles</td><td class="mono">P(A∪B) = P(A)+P(B)</td></tr>
+        <tr><td>Prob. conditionnelle</td><td class="mono">P_A(B) = P(A∩B)/P(A)</td></tr>
+        <tr><td>Probabilité composée</td><td class="mono">P(A∩B) = P(A)·P_A(B)</td></tr>
+        <tr><td>Indépendance</td><td class="mono">P(A∩B) = P(A)·P(B)</td></tr>
+        <tr><td>Équiprobabilité</td><td class="mono">P(A) = card(A)/card(Ω)</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div id="ch2-exemples" style="display:none">
+    <div class="card green">
+      <h3>Exemple — Jeu de cartes (tirage simultan) <span class="tag ex">EX</span></h3>
+      <p>Jeu de 32 cartes, on tire 4 cartes. Calculer P("2 rois et 2 valets tirés").</p>
+      <div class="formula">card(Ω) = C<sup>4</sup><sub>32</sub> = 35 960</div>
+      <p>card(A) = C<sup>2</sup><sub>4</sub> × C<sup>2</sup><sub>4</sub> = 6 × 6 = 36</p>
+      <div class="formula">P(A) = 36/35960 = 9/8990 ≈ 0,001</div>
+    </div>
+    <div class="card green">
+      <h3>Exemple — Urne, tirages successifs sans remise <span class="tag ex">EX</span></h3>
+      <p>Urne : 5 boules rouges, 3 boules noires. Prob. d'obtenir 2 boules rouges successives ?</p>
+      <div class="formula">P(A₁∩A₂) = P(A₁)×P<sub>A₁</sub>(A₂) = (5/8)×(4/7) = 20/56 = 5/14 ≈ 0,357</div>
+    </div>
+  </div>
+</div>
+
+<!-- CH3: VARIABLES ALÉATOIRES DISCRÈTES -->
+<div id="ch3" class="section">
+  <div class="section-title">
+    <div class="section-icon" style="background:rgba(78,205,196,0.15);">📊</div>
+    <div>
+      <h2>Variables Aléatoires Discrètes</h2>
+      <p>Loi de probabilité, espérance, variance, fonction de répartition</p>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab(this,'ch3','cours')">📖 Cours</button>
+    <button class="tab" onclick="switchTab(this,'ch3','recap')">📋 Récapitulatif</button>
+    <button class="tab" onclick="switchTab(this,'ch3','exemples')">🔍 Exemples</button>
+  </div>
+
+  <div id="ch3-cours">
+    <div class="card blue">
+      <h3>Variable aléatoire <span class="tag def">DEF</span></h3>
+      <p>Une variable aléatoire X est une application de Ω dans ℝ : à chaque résultat ω on associe un nombre réel X(ω).</p>
+      <div class="highlight"><strong>Discrète d'ordre fini</strong> : X prend un nombre fini de valeurs x₁, x₂, …, xₙ, avec pᵢ = P(X = xᵢ).</div>
+    </div>
+
+    <div class="card gold">
+      <h3>Espérance mathématique <span class="tag def">DEF</span></h3>
+      <p>Analogue de la moyenne statistique pondérée par les probabilités :</p>
+      <div class="formula">E(X) = Σ pᵢ · xᵢ = Σ xᵢ · P(X = xᵢ)</div>
+      <p><strong>Propriétés :</strong></p>
+      <ul class="concept-list">
+        <li>E(aX + b) = a·E(X) + b</li>
+        <li>E(X + Y) = E(X) + E(Y)</li>
+        <li>Si X et Y indépendantes : E(X·Y) = E(X) × E(Y)</li>
+      </ul>
+    </div>
+
+    <div class="card teal">
+      <h3>Variance et écart-type <span class="tag def">DEF</span></h3>
+      <div class="formula">V(X) = E[(X−E(X))²] = E(X²) − [E(X)]²</div>
+      <div class="formula">σ(X) = √V(X)</div>
+      <p><strong>Propriétés :</strong></p>
+      <ul class="concept-list">
+        <li>V(aX + b) = a²·V(X)</li>
+        <li>Si X, Y indépendantes : V(X±Y) = V(X) + V(Y)</li>
+      </ul>
+    </div>
+
+    <div class="card red">
+      <h3>Fonction de répartition <span class="tag def">DEF</span></h3>
+      <p>F(x) = P(X ≤ x). C'est une fonction en escalier croissante pour les variables discrètes.</p>
+      <ul class="concept-list">
+        <li>F(x) = 0 pour x &lt; min des valeurs de X</li>
+        <li>F(x) = 1 pour x ≥ max des valeurs de X</li>
+        <li>P(a &lt; X ≤ b) = F(b) − F(a)</li>
+        <li>P(X ≥ a) = 1 − F(a⁻) = 1 − P(X &lt; a)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="ch3-recap" style="display:none">
+    <div class="card blue">
+      <h3>📋 Synthèse — Variables aléatoires</h3>
+      <table class="recap-table">
+        <tr><th>Grandeur</th><th>Formule</th><th>Analogue statistique</th></tr>
+        <tr><td>Espérance E(X)</td><td class="mono">Σ xᵢ·pᵢ</td><td>Moyenne x̄</td></tr>
+        <tr><td>Variance V(X)</td><td class="mono">E(X²) − [E(X)]²</td><td>Variance s²</td></tr>
+        <tr><td>Écart-type σ(X)</td><td class="mono">√V(X)</td><td>Écart-type s</td></tr>
+        <tr><td>Répartition F(x)</td><td class="mono">P(X ≤ x)</td><td>Fréquence cumulée</td></tr>
+        <tr><td>Variable centrée</td><td class="mono">Y = X − E(X)</td><td>—</td></tr>
+        <tr><td>Variable réduite</td><td class="mono">Y = X/σ(X)</td><td>—</td></tr>
+        <tr><td>Variable centrée réduite</td><td class="mono">Y = (X−E(X))/σ(X)</td><td>Normée</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div id="ch3-exemples" style="display:none">
+    <div class="card green">
+      <h3>Exemple — Deux pièces de monnaie <span class="tag ex">EX</span></h3>
+      <p>On lance 2 pièces non truquées. X = gain du joueur (10F par pile). Distribution :</p>
+      <table class="recap-table">
+        <tr><th>X</th><th>0</th><th>10</th><th>20</th></tr>
+        <tr><td>P(X=x)</td><td class="mono">1/4</td><td class="mono">1/2</td><td class="mono">1/4</td></tr>
+      </table>
+      <div class="formula">E(X) = 0×(1/4) + 10×(1/2) + 20×(1/4) = 0 + 5 + 5 = <strong style="color:var(--accent2)">10</strong></div>
+      <div class="formula">V(X) = E(X²) − [E(X)]² = (0+50+100) − 100 = <strong style="color:var(--accent2)">50</strong></div>
+      <div class="formula">σ(X) = √50 ≈ <strong style="color:var(--accent2)">7,07</strong></div>
+    </div>
+  </div>
+</div>
+
+<!-- CH4: LOI BINOMIALE & POISSON -->
+<div id="ch4" class="section">
+  <div class="section-title">
+    <div class="section-icon" style="background:rgba(255,107,107,0.15);">🎯</div>
+    <div>
+      <h2>Loi Binomiale &amp; Loi de Poisson</h2>
+      <p>Variables aléatoires discrètes particulières</p>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab(this,'ch4','cours')">📖 Cours</button>
+    <button class="tab" onclick="switchTab(this,'ch4','recap')">📋 Récapitulatif</button>
+    <button class="tab" onclick="switchTab(this,'ch4','exemples')">🔍 Exemples</button>
+  </div>
+
+  <div id="ch4-cours">
+    <div class="card blue">
+      <h3>Épreuve de Bernoulli <span class="tag def">DEF</span></h3>
+      <p>Une épreuve de Bernoulli est une épreuve à <strong style="color:var(--accent1)">deux issues seulement</strong> :</p>
+      <div class="info-grid">
+        <div class="info-box">
+          <div class="label">Succès (résultat a)</div>
+          <div class="value">P(a) = p</div>
+        </div>
+        <div class="info-box">
+          <div class="label">Échec (résultat b)</div>
+          <div class="value">P(b) = q = 1−p</div>
+        </div>
+      </div>
+      <p style="margin-top:12px;">Exemples : pile/face, succès/échec examen, machine en panne/en marche, etc.</p>
+    </div>
+
+    <div class="card gold">
+      <h3>Loi binomiale B(n,p) <span class="tag def">DEF</span></h3>
+      <p>On répète <em>n</em> fois la même épreuve de Bernoulli de manière indépendante. X = nombre de succès.</p>
+      <div class="formula">P(X = k) = C<sup>k</sup><sub>n</sub> · p<sup>k</sup> · (1−p)<sup>n−k</sup> &nbsp;&nbsp; k ∈ {0, 1, …, n}</div>
+      <div class="info-grid">
+        <div class="info-box"><div class="label">Espérance</div><div class="value">E(X) = np</div></div>
+        <div class="info-box"><div class="label">Variance</div><div class="value">V(X) = npq</div></div>
+        <div class="info-box"><div class="label">Écart-type</div><div class="value" style="font-size:16px;">σ = √(npq)</div></div>
+      </div>
+    </div>
+
+    <div class="card teal">
+      <h3>Loi de Poisson P(λ) <span class="tag def">DEF</span></h3>
+      <p>X suit la loi de Poisson de paramètre λ &gt; 0 si :</p>
+      <div class="formula">P(X = k) = e<sup>−λ</sup> · λ<sup>k</sup> / k! &nbsp;&nbsp; k ∈ ℕ</div>
+      <div class="info-grid">
+        <div class="info-box"><div class="label">Espérance</div><div class="value">E(X) = λ</div></div>
+        <div class="info-box"><div class="label">Variance</div><div class="value">V(X) = λ</div></div>
+        <div class="info-box"><div class="label">Écart-type</div><div class="value" style="font-size:16px;">σ = √λ</div></div>
+      </div>
+      <div class="highlight" style="margin-top:14px;">
+        <strong>Champ d'application :</strong> Phénomènes où le futur est indépendant du passé : pannes de machines, appels téléphoniques, files d'attente, mortalité, sinistres...
+      </div>
+    </div>
+
+    <div class="card red">
+      <h3>Approximation B(n,p) ≈ P(λ) <span class="tag thm">THM</span></h3>
+      <p>Quand n est grand, p proche de 0 et np pas trop grand, on peut approcher la loi binomiale par la loi de Poisson :</p>
+      <div class="formula">B(n, p) ≈ P(λ) avec λ = n·p</div>
+      <div class="highlight">
+        <strong>Conditions pratiques :</strong> n ≥ 30 et p ≤ 0,1 et np &lt; 15<br>
+        <em>ou</em> n ≥ 50 et p ≤ 0,1 et np ≤ 10
+      </div>
+    </div>
+  </div>
+
+  <div id="ch4-recap" style="display:none">
+    <div class="card blue">
+      <h3>📋 Comparaison des lois discrètes</h3>
+      <table class="recap-table">
+        <tr><th></th><th>B(n,p)</th><th>P(λ)</th></tr>
+        <tr><td>Paramètres</td><td class="mono">n, p</td><td class="mono">λ</td></tr>
+        <tr><td>P(X=k)</td><td class="mono">Cₙᵏ·pᵏ·qⁿ⁻ᵏ</td><td class="mono">e⁻λ·λᵏ/k!</td></tr>
+        <tr><td>E(X)</td><td class="mono">np</td><td class="mono">λ</td></tr>
+        <tr><td>V(X)</td><td class="mono">npq</td><td class="mono">λ</td></tr>
+        <tr><td>σ(X)</td><td class="mono">√(npq)</td><td class="mono">√λ</td></tr>
+        <tr><td>Domaine</td><td>k = 0,1,…,n (fini)</td><td>k = 0,1,2,… (infini)</td></tr>
+        <tr><td>Approximation</td><td colspan="2" class="mono">B(n,p) ≈ P(np) si n≥30, p≤0,1</td></tr>
+      </table>
+    </div>
+    <div class="card teal">
+      <h3>Table Poisson λ = 5 (extrait)</h3>
+      <div style="display:flex; gap:20px; flex-wrap:wrap;">
+        <div class="poisson-table">
+          <div class="pt-header">k</div><div class="pt-header">P(X=k)</div>
+          <div class="pt-cell">0</div><div class="pt-cell">0,007</div>
+          <div class="pt-cell">1</div><div class="pt-cell">0,034</div>
+          <div class="pt-cell">2</div><div class="pt-cell">0,084</div>
+          <div class="pt-cell">3</div><div class="pt-cell">0,140</div>
+          <div class="pt-cell">4</div><div class="pt-cell">0,176</div>
+          <div class="pt-cell">5</div><div class="pt-cell">0,176</div>
+          <div class="pt-cell">6</div><div class="pt-cell">0,146</div>
+          <div class="pt-cell">7</div><div class="pt-cell">0,104</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="ch4-exemples" style="display:none">
+    <div class="card green">
+      <h3>Exemple — Loi binomiale (examen) <span class="tag ex">EX</span></h3>
+      <p>Prob. d'admission = 0,3. 5 candidats. P(aucun admis) = ?</p>
+      <div class="formula">X ~ B(5 ; 0,3)</div>
+      <div class="formula">P(X=0) = C⁰₅ · (0,3)⁰ · (0,7)⁵ = (0,7)⁵ ≈ <strong style="color:var(--accent2)">0,168</strong></div>
+      <p>P(au moins 2 admis) = 1 − P(X=0) − P(X=1) = 1 − 0,168 − 0,360 ≈ <strong style="color:var(--accent2)">0,472</strong></p>
+    </div>
+    <div class="card green">
+      <h3>Exemple — Loi de Poisson (guichet) <span class="tag ex">EX</span></h3>
+      <p>En 10 minutes, 5 clients en moyenne arrivent à un guichet. Prob. d'avoir au moins 8 clients ?</p>
+      <div class="formula">X ~ P(λ=5)</div>
+      <div class="formula">P(X≥8) = 1 − P(X≤7) = 1 − 0,867 = <strong style="color:var(--accent2)">0,133</strong></div>
+    </div>
+    <div class="card green">
+      <h3>Exemple — Approximation de Poisson <span class="tag ex">EX</span></h3>
+      <p>Sur 10 000 pièces, 50 en moyenne sont défectueuses. Parmi 400 pièces, probabilité qu'une seule soit défectueuse ?</p>
+      <div class="formula">p = 50/10000 = 0,005 ; n=400 → λ = 400×0,005 = 2</div>
+      <div class="formula">P(X=1) = e⁻² × 2¹/1! = 2e⁻² ≈ <strong style="color:var(--accent2)">0,271</strong></div>
+    </div>
+  </div>
+</div>
+
+<!-- CH5: LOI NORMALE -->
+<div id="ch5" class="section">
+  <div class="section-title">
+    <div class="section-icon" style="background:rgba(87,199,133,0.15);">🔔</div>
+    <div>
+      <h2>Variables Continues &amp; Loi Normale</h2>
+      <p>Densité, loi de Gauss, ajustement, échantillonnages</p>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab(this,'ch5','cours')">📖 Cours</button>
+    <button class="tab" onclick="switchTab(this,'ch5','recap')">📋 Récapitulatif</button>
+    <button class="tab" onclick="switchTab(this,'ch5','exemples')">🔍 Exemples</button>
+  </div>
+
+  <div id="ch5-cours">
+    <div class="card blue">
+      <h3>Variable aléatoire continue <span class="tag def">DEF</span></h3>
+      <p>X est continue si X&lt;Ω&gt; est un intervalle de ℝ. La probabilité d'un singleton est nulle : <span class="mono">P(X=x) = 0</span> pour tout x.</p>
+      <div class="highlight"><strong>Conséquence :</strong> On ne caractérise plus X par des couples (xᵢ, pᵢ) mais par sa <strong>fonction de répartition F</strong> ou sa <strong>densité de probabilité f</strong>.</div>
+    </div>
+
+    <div class="card gold">
+      <h3>Densité de probabilité <span class="tag def">DEF</span></h3>
+      <p>f est la densité de X si f est la dérivée de F sur ℝ. Propriétés :</p>
+      <ul class="concept-list">
+        <li>f(x) ≥ 0 pour tout x réel</li>
+        <li>∫<sub>−∞</sub><sup>+∞</sup> f(t)dt = 1 (aire totale = 1)</li>
+        <li>P(α ≤ X ≤ β) = F(β) − F(α) = ∫<sub>α</sub><sup>β</sup> f(t)dt</li>
+      </ul>
+      <div class="formula">E(X) = ∫<sub>−∞</sub><sup>+∞</sup> t·f(t)dt &nbsp;&nbsp; V(X) = ∫<sub>−∞</sub><sup>+∞</sup> [t−E(X)]² f(t)dt</div>
+    </div>
+
+    <div class="card teal">
+      <h3>Loi normale N(m, σ) <span class="tag def">DEF</span></h3>
+      <p>X suit la loi normale (ou de Gauss-Laplace) de paramètres m et σ si sa densité est :</p>
+      <div class="formula">f(t) = 1/(σ√2π) · exp[−½·((t−m)/σ)²]</div>
+      <div class="info-grid">
+        <div class="info-box"><div class="label">Espérance</div><div class="value">E(X) = m</div></div>
+        <div class="info-box"><div class="label">Variance</div><div class="value">V(X) = σ²</div></div>
+      </div>
+      <div class="highlight" style="margin-top:14px;">
+        La courbe est en « cloche », symétrique par rapport à x = m. Points d'inflexion en x = m ± σ.
+      </div>
+    </div>
+
+    <div class="card red">
+      <h3>Loi normale centrée réduite N(0,1) <span class="tag thm">THM</span></h3>
+      <p>Si X ~ N(m, σ), alors <strong style="color:var(--accent2)">T = (X−m)/σ</strong> suit la loi N(0,1).</p>
+      <p>On calcule les probabilités grâce à la table de la fonction Π (ou Φ) :</p>
+      <ul class="concept-list">
+        <li>P(T ≤ t) = Π(t)</li>
+        <li>P(T ≥ t) = 1 − Π(t)</li>
+        <li>P(T ≤ −t) = 1 − Π(t) (symétrie)</li>
+        <li>P(t₁ ≤ T ≤ t₂) = Π(t₂) − Π(t₁)</li>
+      </ul>
+    </div>
+
+    <div class="card blue">
+      <h3>Intervalles remarquables <span class="tag prop">PROP</span></h3>
+      <table class="recap-table">
+        <tr><th>Intervalle</th><th>P(m−aσ ≤ X ≤ m+aσ)</th><th>Signification</th></tr>
+        <tr><td>[m−σ, m+σ]</td><td class="mono">≈ 68,26%</td><td>2/3 des valeurs</td></tr>
+        <tr><td>[m−2σ, m+2σ]</td><td class="mono">≈ 95,44%</td><td>Quasi-totalité</td></tr>
+        <tr><td>[m−3σ, m+3σ]</td><td class="mono">≈ 99,73%</td><td>Presque toutes</td></tr>
+      </table>
+    </div>
+
+    <div class="card gold">
+      <h3>Théorème de la limite centrée (TLC) <span class="tag thm">THM</span></h3>
+      <p>X₁, …, Xₙ variables indépendantes de même loi, d'espérance m et d'écart-type σ. Pour n grand :</p>
+      <div class="formula">S̄ = (X₁+…+Xₙ)/n suit approximativement N(m, σ/√n)</div>
+      <div class="highlight"><strong>Application :</strong> Distribution d'échantillonnage des moyennes.<br>
+      σ(X̄) = σ/√n (tirage avec remise) &nbsp;ou&nbsp; σ/√n · √((N−n)/(N−1)) (sans remise).</div>
+    </div>
+
+    <div class="card teal">
+      <h3>Approximation B(n,p) ≈ N(m,σ) <span class="tag thm">THM</span></h3>
+      <p>Si n est grand et p ni trop proche de 0 ni de 1 :</p>
+      <div class="formula">B(n,p) ≈ N(m=np, σ=√(npq)) &nbsp; si n≥30 et 0,2≤p≤0,8</div>
+    </div>
+  </div>
+
+  <div id="ch5-recap" style="display:none">
+    <div class="card blue">
+      <h3>📋 Méthode de calcul avec N(m,σ)</h3>
+      <table class="recap-table">
+        <tr><th>Probabilité cherchée</th><th>Méthode</th></tr>
+        <tr><td>P(X ≤ x)</td><td class="mono">Π((x−m)/σ)</td></tr>
+        <tr><td>P(X ≥ x)</td><td class="mono">1 − Π((x−m)/σ)</td></tr>
+        <tr><td>P(X ≤ −x) avec x>0</td><td class="mono">1 − Π((x−m)/σ)</td></tr>
+        <tr><td>P(x₁ ≤ X ≤ x₂)</td><td class="mono">Π((x₂−m)/σ) − Π((x₁−m)/σ)</td></tr>
+      </table>
+    </div>
+    <div class="card gold">
+      <h3>📋 Résumé des distributions d'échantillonnage</h3>
+      <table class="recap-table">
+        <tr><th>Type</th><th>Loi</th><th>σ de la distrib.</th></tr>
+        <tr><td>Moyennes (remise)</td><td class="mono">N(m, σ/√n)</td><td class="mono">σ/√n</td></tr>
+        <tr><td>Moyennes (sans remise)</td><td class="mono">N(m, σ·√((N-n)/(N-1)) /√n)</td><td>Corrigée</td></tr>
+        <tr><td>Pourcentages (remise)</td><td class="mono">N(p, √(pq/n))</td><td class="mono">√(pq/n)</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div id="ch5-exemples" style="display:none">
+    <div class="card green">
+      <h3>Exemple — Taille des élèves <span class="tag ex">EX</span></h3>
+      <p>Taille X ~ N(160 cm, σ=10 cm). Calculer diverses probabilités.</p>
+      <p>On pose T = (X − 160)/10 ~ N(0,1)</p>
+      <div class="formula">P(X &gt; 180) = P(T &gt; 2) = 1 − Π(2) = 1 − 0,9772 = <strong style="color:var(--accent2)">0,0228</strong></div>
+      <div class="formula">P(X ≤ 155) = P(T ≤ −0,5) = 1 − Π(0,5) = 1 − 0,6915 = <strong style="color:var(--accent2)">0,3085</strong></div>
+      <div class="formula">P(169 ≤ X ≤ 178) = Π(1,8) − Π(0,9) = 0,9641 − 0,8159 = <strong style="color:var(--accent2)">0,1482</strong></div>
+    </div>
+    <div class="card green">
+      <h3>Exemple — Poids de pièces fabriquées <span class="tag ex">EX</span></h3>
+      <p>Poids X ~ N(768 g, σ²=6,25). σ = 2,5 g. Calculer P(X ≤ 770,95).</p>
+      <div class="formula">T = (770,95 − 768)/2,5 = 2,95/2,5 = 1,18</div>
+      <div class="formula">P(X ≤ 770,95) = Π(1,18) = <strong style="color:var(--accent2)">0,881</strong></div>
+    </div>
+  </div>
+</div>
+
+<!-- EXERCICES -->
+<div id="ex" class="section">
+  <div class="section-title">
+    <div class="section-icon" style="background:rgba(87,199,133,0.15);">✏️</div>
+    <div>
+      <h2>Exercices Corrigés</h2>
+      <p>Entraînement — Cliquez pour développer chaque exercice</p>
+    </div>
+  </div>
+
+  <div style="margin-bottom:20px;">
+    <span style="color:var(--text2); font-size:13px;">Filtrer par chapitre : </span>
+    <span class="topic-chip" style="cursor:pointer; margin:4px;" onclick="filterEx('all')">Tous</span>
+    <span class="topic-chip" style="cursor:pointer; margin:4px;" onclick="filterEx('ch1')">Dénombrements</span>
+    <span class="topic-chip" style="cursor:pointer; margin:4px;" onclick="filterEx('ch2')">Proba</span>
+    <span class="topic-chip" style="cursor:pointer; margin:4px;" onclick="filterEx('ch3')">V.A. discrètes</span>
+    <span class="topic-chip" style="cursor:pointer; margin:4px;" onclick="filterEx('ch4')">Binomiale/Poisson</span>
+    <span class="topic-chip" style="cursor:pointer; margin:4px;" onclick="filterEx('ch5')">Loi normale</span>
+  </div>
+
+  <!-- Dénombrements -->
+  <div class="exercise-card" data-ch="ch1">
+    <div class="exercise-header" onclick="toggleEx(this)">
+      <h4><span class="ex-num">01</span> Tiercé avec 12 chevaux</h4>
+      <div style="display:flex;gap:12px;align-items:center;">
+        <span style="color:var(--accent1);font-size:12px;">Dénombrements</span>
+        <div class="difficulty"><span class="star">★</span><span class="star">★</span><span class="star empty">★</span></div>
+        <span class="toggle-arrow">▼</span>
+      </div>
+    </div>
+    <div class="exercise-body">
+      <div class="exercise-q">Combien y a-t-il de tiercés dans l'ordre possibles avec 12 chevaux partants ?</div>
+      <button class="solution-toggle" onclick="toggleSol(this)">👁 Voir la solution</button>
+      <div class="solution">
+        <h5>Solution détaillée</h5>
+        <p>Un tiercé dans l'ordre désigne les chevaux classés 1er, 2ème et 3ème. <strong>L'ordre intervient</strong> : c'est un arrangement de 3 éléments parmi 12.</p>
+        <div class="formula">N = A³₁₂ = 12 × 11 × 10 = <strong style="color:var(--accent2)">1 320</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="exercise-card" data-ch="ch1">
+    <div class="exercise-header" onclick="toggleEx(this)">
+      <h4><span class="ex-num">02</span> Nombres de 3 chiffres distincts</h4>
+      <div style="display:flex;gap:12px;align-items:center;">
+        <span style="color:var(--accent1);font-size:12px;">Dénombrements</span>
+        <div class="difficulty"><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+        <span class="toggle-arrow">▼</span>
+      </div>
+    </div>
+    <div class="exercise-body">
+      <div class="exercise-q">Combien peut-on former de nombres de 3 chiffres <strong>distincts</strong> à partir des 10 chiffres de la numérotation décimale ?</div>
+      <button class="solution-toggle" onclick="toggleSol(this)">👁 Voir la solution</button>
+      <div class="solution">
+        <h5>Solution détaillée</h5>
+        <p>Nombre total d'arrangements d'ordre 3 parmi 10 :</p>
+        <div class="formula">A³₁₀ = 10 × 9 × 8 = 720</div>
+        <p>Mais parmi ceux-là, certains commencent par 0 (012, 013, …) et ne sont pas des nombres à 3 chiffres. Il faut les retrancher. Ce sont les arrangements d'ordre 2 parmi les 9 chiffres ≠ 0 :</p>
+        <div class="formula">A²₉ = 9 × 8 = 72</div>
+        <div class="formula">Réponse : 720 − 72 = <strong style="color:var(--accent2)">648</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="exercise-card" data-ch="ch1">
+    <div class="exercise-header" onclick="toggleEx(this)">
+      <h4><span class="ex-num">03</span> Placement sur un banc (filles et garçons)</h4>
+      <div style="display:flex;gap:12px;align-items:center;">
+        <span style="color:var(--accent1);font-size:12px;">Dénombrements</span>
+        <div class="difficulty"><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+        <span class="toggle-arrow">▼</span>
+      </div>
+    </div>
+    <div class="exercise-body">
+      <div class="exercise-q">4 filles et 3 garçons s'assoient sur un banc.<br>1. Les garçons sont côte à côte, les filles aussi.<br>2. Pas deux garçons ni deux filles côte à côte (alternance).</div>
+      <button class="solution-toggle" onclick="toggleSol(this)">👁 Voir la solution</button>
+      <div class="solution">
+        <h5>Solution détaillée</h5>
+        <p><strong>1. Groupes homogènes :</strong> On ordonne les 3 garçons entre eux (P₃ = 6 façons) et les 4 filles entre elles (P₄ = 24 façons). Les deux groupes peuvent être dans 2 ordres (G d'abord ou F d'abord).</p>
+        <div class="formula">N = 2 × 6 × 24 = <strong style="color:var(--accent2)">288</strong></div>
+        <p><strong>2. Alternance :</strong> Les filles (les plus nombreuses) occupent les places 1,3,5,7 et les garçons les places 2,4,6.</p>
+        <div class="formula">N = P₄ × P₃ = 24 × 6 = <strong style="color:var(--accent2)">144</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Probabilités -->
+  <div class="exercise-card" data-ch="ch2">
+    <div class="exercise-header" onclick="toggleEx(this)">
+      <h4><span class="ex-num">04</span> Deux dés (rouge et bleu)</h4>
+      <div style="display:flex;gap:12px;align-items:center;">
+        <span style="color:var(--accent2);font-size:12px;">Probabilités</span>
+        <div class="difficulty"><span class="star">★</span><span class="star">★</span><span class="star empty">★</span></div>
+        <span class="toggle-arrow">▼</span>
+      </div>
+    </div>
+    <div class="exercise-body">
+      <div class="exercise-q">On jette deux dés non pipés. Calculer :<br>a) P("obtenir 2 fois le point 1")<br>b) P("somme égale à 4")<br>c) P("somme égale à 11")</div>
+      <button class="solution-toggle" onclick="toggleSol(this)">👁 Voir la solution</button>
+      <div class="solution">
+        <h5>Solution détaillée</h5>
+        <p>Ω = {(a,b), a,b ∈ {1,…,6}} → card(Ω) = 36, équiprobabilité.</p>
+        <div class="formula">a) A₁ = {(1,1)} → P(A₁) = 1/36</div>
+        <div class="formula">b) B₁ = {(1,3),(2,2),(3,1)} → P(B₁) = 3/36 = 1/12</div>
+        <div class="formula">c) C₁ = {(5,6),(6,5)} → P(C₁) = 2/36 = 1/18</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- V.A. discrètes -->
+  <div class="exercise-card" data-ch="ch3">
+    <div class="exercise-header" onclick="toggleEx(this)">
+      <h4><span class="ex-num">05</span> Urne : 2 blanches, 3 noires — Espérance et variance</h4>
+      <div style="display:flex;gap:12px;align-items:center;">
+        <span style="color:var(--accent3);font-size:12px;">V.A. discrètes</span>
+        <div class="difficulty"><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+        <span class="toggle-arrow">▼</span>
+      </div>
+    </div>
+    <div class="exercise-body">
+      <div class="exercise-q">Une urne contient 5 boules dont 2 blanches et 3 noires. On tire une boule de l'urne sans la remettre, 3 fois de suite. X = nombre de boules blanches tirées. Calculer E(X), V(X) et σ(X).</div>
+      <button class="solution-toggle" onclick="toggleSol(this)">👁 Voir la solution</button>
+      <div class="solution">
+        <h5>Solution détaillée</h5>
+        <p>X peut prendre les valeurs 0, 1, 2. On assimile à un tirage simultané de 3 boules parmi 5 (card Ω = C²₅ = 10).</p>
+        <div class="formula">P(X=0) = C³₃/C³₅ = 1/10 &nbsp; P(X=1) = C¹₂·C²₃/C³₅ = 6/10 = 3/5 &nbsp; P(X=2) = C²₂·C¹₃/C³₅ = 3/10</div>
+        <div class="formula">E(X) = 0×(1/10) + 1×(3/5) + 2×(3/10) = 0 + 6/10 + 6/10 = <strong style="color:var(--accent2)">6/5</strong></div>
+        <div class="formula">V(X) = E(X²) − [E(X)]² = (0 + 3/5 + 12/10) − 36/25 = 9/5 − 36/25 = 9/25</div>
+        <div class="formula">σ(X) = √(9/25) = <strong style="color:var(--accent2)">3/5 = 0,6</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Binomiale/Poisson -->
+  <div class="exercise-card" data-ch="ch4">
+    <div class="exercise-header" onclick="toggleEx(this)">
+      <h4><span class="ex-num">06</span> Loi binomiale — Machines en panne</h4>
+      <div style="display:flex;gap:12px;align-items:center;">
+        <span style="color:var(--accent4);font-size:12px;">Binomiale/Poisson</span>
+        <div class="difficulty"><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+        <span class="toggle-arrow">▼</span>
+      </div>
+    </div>
+    <div class="exercise-body">
+      <div class="exercise-q">30 machines. Prob. de panne = 0,05 par jour. Z = nombre de pannes.<br>A parie qu'une seule machine tombera en panne ; B parie pour deux. Qui a plus de chances ?</div>
+      <button class="solution-toggle" onclick="toggleSol(this)">👁 Voir la solution</button>
+      <div class="solution">
+        <h5>Solution détaillée</h5>
+        <p>Z ~ B(30 ; 0,05).</p>
+        <div class="formula">P(Z=1) = C¹₃₀ · (0,05)¹ · (0,95)²⁹ = 30 × 0,05 × (0,95)²⁹ ≈ <strong style="color:var(--accent2)">0,340</strong></div>
+        <div class="formula">P(Z=2) = C²₃₀ · (0,05)² · (0,95)²⁸ ≈ 29/38 × P(Z=1) ≈ <strong style="color:var(--accent2)">0,259</strong></div>
+        <p>P(Z=1) &gt; P(Z=2) → <strong style="color:var(--success)">A a le plus de chances de gagner.</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="exercise-card" data-ch="ch4">
+    <div class="exercise-header" onclick="toggleEx(this)">
+      <h4><span class="ex-num">07</span> Approximation de Poisson — Ruptures de stock</h4>
+      <div style="display:flex;gap:12px;align-items:center;">
+        <span style="color:var(--accent4);font-size:12px;">Binomiale/Poisson</span>
+        <div class="difficulty"><span class="star">★</span><span class="star">★</span><span class="star empty">★</span></div>
+        <span class="toggle-arrow">▼</span>
+      </div>
+    </div>
+    <div class="exercise-body">
+      <div class="exercise-q">Prob. de rupture de stock hebdomadaire = 1,25%. X = nombre de ruptures en 52 semaines. Calculer P(X=0) et P(X&gt;2) par approximation de Poisson.</div>
+      <button class="solution-toggle" onclick="toggleSol(this)">👁 Voir la solution</button>
+      <div class="solution">
+        <h5>Solution détaillée</h5>
+        <p>n=52, p=0,0125. n≥30 et p≤0,1 → Approximation valide avec λ = np = 52×0,0125 = 0,65</p>
+        <div class="formula">P(X=0) = e⁻⁰·⁶⁵ ≈ <strong style="color:var(--accent2)">0,52</strong></div>
+        <div class="formula">P(X&gt;2) = 1 − [P(X=0)+P(X=1)+P(X=2)]</div>
+        <div class="formula">≈ 1 − [0,52 + 0,34 + 0,11] = 1 − 0,97 = <strong style="color:var(--accent2)">0,03</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loi normale -->
+  <div class="exercise-card" data-ch="ch5">
+    <div class="exercise-header" onclick="toggleEx(this)">
+      <h4><span class="ex-num">08</span> Loi normale — Filaments</h4>
+      <div style="display:flex;gap:12px;align-items:center;">
+        <span style="color:var(--success);font-size:12px;">Loi normale</span>
+        <div class="difficulty"><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+        <span class="toggle-arrow">▼</span>
+      </div>
+    </div>
+    <div class="exercise-body">
+      <div class="exercise-q">Diamètre X ~ N(150 mm, σ=5 mm). Tolérance ±8% par rapport à la moyenne. Calculer le pourcentage de rebuts.</div>
+      <button class="solution-toggle" onclick="toggleSol(this)">👁 Voir la solution</button>
+      <div class="solution">
+        <h5>Solution détaillée</h5>
+        <p>Tolérance : 8% de 150 = 12 mm → Intervalle acceptable [138 ; 162].</p>
+        <p>Rebut si X ∉ [138 ; 162].</p>
+        <div class="formula">T = (X−150)/5 ~ N(0,1)</div>
+        <div class="formula">P(138 ≤ X ≤ 162) = P(−2,4 ≤ T ≤ 2,4) = 2Π(2,4)−1 = 2×0,9918−1 = 0,9836</div>
+        <div class="formula">P(rebut) = 1 − 0,9836 = 0,0164 → <strong style="color:var(--accent2)">1,64% de rebuts</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="exercise-card" data-ch="ch5">
+    <div class="exercise-header" onclick="toggleEx(this)">
+      <h4><span class="ex-num">09</span> Échantillonnage — Boulons défectueux</h4>
+      <div style="display:flex;gap:12px;align-items:center;">
+        <span style="color:var(--success);font-size:12px;">Loi normale</span>
+        <div class="difficulty"><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+        <span class="toggle-arrow">▼</span>
+      </div>
+    </div>
+    <div class="exercise-body">
+      <div class="exercise-q">4% des boulons sont défectueux. Caisses de 1000. Calculer :<br>1) P(proportion défectueux &lt; 2%)<br>2) P(proportion défectueux &gt; 5%)</div>
+      <button class="solution-toggle" onclick="toggleSol(this)">👁 Voir la solution</button>
+      <div class="solution">
+        <h5>Solution détaillée</h5>
+        <p>p=0,04, n=1000. P suit N(p, √(pq/n)).</p>
+        <div class="formula">σ(P) = √(0,04×0,96/1000) ≈ 0,0062</div>
+        <div class="formula">1) P(P ≤ 0,02) = P(T ≤ (0,02−0,04)/0,0062) = P(T ≤ −3,22) = 1−Π(3,22) ≈ <strong style="color:var(--accent2)">0,065%</strong></div>
+        <div class="formula">2) P(P ≥ 0,05) = P(T ≥ (0,05−0,04)/0,0062) = P(T ≥ 1,61) = 1−Π(1,61) ≈ <strong style="color:var(--accent2)">0,54%</strong></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- END SECTIONS -->
+</div>
+</body>
+</html>
